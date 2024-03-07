@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export type GridCellType = {
+export interface GridCellType {
   id: string;
   selected: boolean;
   o: boolean;

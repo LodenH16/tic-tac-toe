@@ -1,18 +1,36 @@
 // react stuff
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 // game helpers
 import { GridCellType } from "./gameContextStuff";
 // game context
-import { GameContext } from "./page";
+// import { GameContext } from "./page";
 
-export default function GridCell(props: GridCellType) {
-  const gameData = useContext(GameContext);
+interface cellProps {
+  cellState: GridCellType;
+  gameState: GridCellType[];
+  updateGameState: React.Dispatch<React.SetStateAction<any>>;
+}
 
+export default function GridCell({
+  cellState,
+  gameState,
+  updateGameState,
+}: cellProps) {
+  // const gameData = useContext(GameContext);
+
+  const handleClick = () => {
+    let newGameState = gameState;
+    gameState[parseInt(cellState.id)].selected = true;
+    updateGameState(newGameState);
+  };
+
+  console.log(cellState);
   return (
     <div
-      id={props.id}
-      key={`block-${props.id}`}
+      id={cellState.id}
+      key={`cell-${cellState.id}`}
       className="size-full rounded-lg bg-slate-300 hover:bg-slate-400"
+      onClick={handleClick}
     >
       &#215; &#9711;
     </div>
