@@ -5,26 +5,19 @@ import "./globals.css"
 // React stuff
 import { createContext } from "react"
 //components
-import GridCell from "./GridCell"
+import Cell from "./Cell"
+// game stuff
+import { makeEachGridCell, GridCell } from "./gameContextStuff"
+
 export default function Home() {
 
-    const makeEachGridCell = (id: number) => {
-        return {
-            id: id,
-            selected: false,
-            o: false,
-            x: false
-        }
-    }
-
     let gridCells = []
-    
     for (let i = 1; i <= 9; i++) {
         gridCells.push(makeEachGridCell(i))
     }
 
-    const blocks = gridCells.map((cell: object) => {
-        return GridCell(cell.id)
+    const blocks = gridCells.map((cell: GridCell) => {
+        return Cell(cell.id)
     })
     
     const GameContext = createContext(null)
