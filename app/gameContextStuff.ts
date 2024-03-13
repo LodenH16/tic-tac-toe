@@ -7,7 +7,7 @@ export interface GridCellType {
   x: boolean;
 };
 
-export const makeEachGridCell = (id: number) => {
+export const makeEachGridCellState = (id: number) => {
   return {
     id: id.toString(),
     selected: false,
@@ -16,9 +16,9 @@ export const makeEachGridCell = (id: number) => {
   };
 };
 
-let gridCells: GridCellType[] = [];
+let defaultGridCells: GridCellType[] = [];
 for (let i = 0; i < 9; i++) {
-  gridCells.push(makeEachGridCell(i));
+  defaultGridCells.push(makeEachGridCellState(i));
 }
 
-export { gridCells };
+export { defaultGridCells };

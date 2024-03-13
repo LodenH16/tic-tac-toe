@@ -3,21 +3,25 @@
 // css and stuff
 import "./globals.css"
 // React stuff
-import { createContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 //components
 import Cell from "./Cell";
 // game helpers
-import { GridCellType, gridCells } from "./gameContextStuff";
-// game context
-//export const GameContext = createContext();
+import { GridCellType, defaultGridCells } from "./gameContextStuff";
 
 export default function Home() {
-    const [gameState, updateGameState] = useState(gridCells);
+  const [gameState, setGameState] = useState(defaultGridCells);
 
-    const cells = gameState.map((cellState: GridCellType) => {
-      return Cell({ cellState, gameState, updateGameState });
-    });
+  const handleCellClick = (cellId: string) => {
+    let newGameState = [...gameState];
+    newGameState[parseInt(cellId)].selected = true;
 
+    setGameState(newGameState);
+  };
+
+  const cells = gameState.map((cellState: GridCellType, index) => {
+    return Cell({ cellState: gameState[index], handleCellClick });
+  });
 
   return (
     <main className="max-w-screen-lg mx-auto p-4">
