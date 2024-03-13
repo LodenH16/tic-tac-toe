@@ -10,17 +10,17 @@ import Cell from "./Cell";
 import { GridCellType, defaultGridCells } from "./gameContextStuff";
 
 export default function Home() {
-  const [gameState, setGameState] = useState(defaultGridCells);
+  const [cellState, setCellState] = useState(defaultGridCells);
 
   const handleCellClick = (cellId: string) => {
-    let newGameState = [...gameState];
-    newGameState[parseInt(cellId)].selected = true;
+    let newCellState = [...cellState];
+    newCellState[parseInt(cellId)].selected = true;
 
-    setGameState(newGameState);
+    setCellState(newCellState);
   };
 
-  const cells = gameState.map((cellState: GridCellType, index) => {
-    return Cell({ cellState: gameState[index], handleCellClick });
+  const cells = cellState.map((cell: GridCellType, index) => {
+    return Cell({ cell, handleCellClick });
   });
 
   return (

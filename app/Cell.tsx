@@ -1,30 +1,28 @@
 // react stuff
 import React, { useState, useContext, useEffect } from "react";
-// tailwind colors
-import tailwindColors from "tailwindcss/colors";
 // game helpers
 import { GridCellType } from "./gameContextStuff";
 
 interface cellProps {
-  cellState: GridCellType;
+  cell: GridCellType;
   handleCellClick: (id: string) => void;
 }
 
-export default function GridCell({ cellState, handleCellClick }: cellProps) {
+export default function GridCell({
+  cell: { id, selected },
+  handleCellClick,
+}: cellProps) {
   return (
     <div
-      id={cellState.id}
-      key={`cell-${cellState.id}`}
+      id={id}
+      key={`cell-${id}`}
       className={
         "size-full rounded-md " +
-        (cellState.selected
-          ? "bg-slate-400"
-          : "bg-slate-300 hover:bg-slate-400")
+        (selected ? "bg-slate-400" : "bg-slate-300 hover:bg-slate-400")
       }
-      onClick={() => handleCellClick(cellState.id)}
-      // style={{ backgroundColor: cellBackgroundColor }}
+      onClick={() => handleCellClick(id)}
     >
-      {cellState.selected ? "true" : "false"}
+      {selected ? "true" : "false"}
     </div>
   );
 }
