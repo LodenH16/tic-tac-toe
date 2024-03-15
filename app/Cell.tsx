@@ -31,9 +31,9 @@ export default function GridCell({
       key={`cell-${id}`}
       disabled={selected}
       className={
-        "size-full rounded-md " +
-        "flex items-center text-center " +
-        (selected ? "bg-slate-400" : "bg-slate-300 hover:bg-slate-400")
+        "size-full rounded-md " + // size and shape of cells
+        "flex items-center text-center " + // center the character texts
+        (selected ? "bg-slate-400" : "bg-slate-300 hover:bg-slate-400") // colors
       }
       onClick={() => handleCellClick(id)}
     >
