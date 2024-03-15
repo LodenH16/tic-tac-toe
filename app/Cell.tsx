@@ -9,7 +9,7 @@ interface cellProps {
 }
 
 export default function GridCell({
-  cell: { id, selected },
+  cell: { id, selected, letter },
   handleCellClick,
 }: cellProps) {
   return (
@@ -22,7 +22,7 @@ export default function GridCell({
       }
       onClick={() => handleCellClick(id)}
     >
-      {selected ? "true" : "false"}
+      {letter}
     </div>
   );
 }

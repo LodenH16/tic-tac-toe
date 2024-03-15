@@ -7,16 +7,37 @@ import { createContext, useContext, useState, useEffect } from "react";
 //components
 import Cell from "./Cell";
 // game helpers
-import { GridCellType, defaultGridCells } from "./gameContextStuff";
+import {
+  GridCellType,
+  GameStateType,
+  makeDefaultGameState,
+  processUserTurn,
+  defaultGridCells,
+  xStartsFirst,
+  oStartsFirst,
+} from "./gameContextStuff";
 
 export default function Home() {
   const [cellState, setCellState] = useState(defaultGridCells);
+  const [gameState, setGameState] = useState(makeDefaultGameState("x", true));
 
   const handleCellClick = (cellId: string) => {
     let newCellState = [...cellState];
-    newCellState[parseInt(cellId)].selected = true;
+    const clickedCell = newCellState[parseInt(cellId)];
+    const turnOrder =
+      gameState.startingTurn === "x" ? xStartsFirst : oStartsFirst;
+
+    // set cell as selected
+    clickedCell.selected = true;
+
+    // update cellState with x or o
+    const letterToDraw = turnOrder[gameState.currentTurn];
+    clickedCell.letter = letterToDraw;
+    // check game over
 
     setCellState(newCellState);
+    setGameState(processUserTurn(gameState));
+    console.log(cellState);
   };
 
   const cells = cellState.map((cell: GridCellType, index) => {
