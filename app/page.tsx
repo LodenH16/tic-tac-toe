@@ -49,9 +49,9 @@ export default function Home() {
       <h1 className="w-full text-center my-4">Some text here</h1>
       <div
         className={
-          "grid grid-cols-3 grid-rows-3 gap-2" + // define grid stuff
-          " w-80 h-80" + // size of inside cells
-          " mx-auto" // margin to put it in the middle
+          "grid grid-cols-3 grid-rows-3 gap-2 " + // define grid stuff
+          "w-80 h-80 " + // size of inside cells
+          "mx-auto" // margin to put it in the middle
         }
       >
         {cells}
