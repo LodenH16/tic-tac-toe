@@ -8,14 +8,13 @@ import { createContext, useContext, useState, useEffect } from "react";
 import Cell from "./Cell";
 // game helpers
 import {
-  GridCellType,
-  GameStateType,
-  makeDefaultGameState,
-  processUserTurn,
-  defaultGridCells,
   xStartsFirst,
   oStartsFirst,
-} from "./gameContextStuff";
+  makeDefaultGameState,
+  processUserTurn,
+} from "./helpers/GameStateHelpers";
+import { GridCellType, defaultGridCells } from "./helpers/CellStateHelpers";
+import { checkEndGame, defaultWinState } from "./helpers/WinStateHelpers";
 
 export default function Home() {
   const [cellState, setCellState] = useState(defaultGridCells);

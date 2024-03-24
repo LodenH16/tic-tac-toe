@@ -1,25 +1,23 @@
 // react stuff
 import React, { useState, useContext, useEffect } from "react";
 // game helpers
-import { GridCellType } from "./gameContextStuff";
+import { GridCellType } from "./helpers/CellStateHelpers";
 
 interface cellProps {
   cell: GridCellType;
   handleCellClick: (id: string) => void;
 }
 
-
 export default function GridCell({
   cell: { id, selected, letter },
   handleCellClick,
 }: cellProps) {
-
   const determineCharacter = () => {
     switch (letter) {
       case "x":
         return <span>&#10005;</span>;
       case "o":
-        return <span>&#9900;</span>;
+        return <span>&#9711;</span>;
       case null:
         return null;
     }
