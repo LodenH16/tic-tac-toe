@@ -3,7 +3,7 @@ import { GridCellType } from "./CellStateHelpers";
 
 // interfaces
 export interface WinState {
-  hasWon: boolean;
+  gameOver: boolean;
   winner: string | null;
   winningRow: number[];
 }
@@ -35,7 +35,7 @@ const xWins = JSON.stringify(["x", "x", "x"]);
 const oWins = JSON.stringify(["o", "o", "o"]);
 
 export const defaultWinState: WinState = {
-  hasWon: false,
+  gameOver: false,
   winner: null,
   winningRow: [],
 };
@@ -78,7 +78,7 @@ export const checkEndGame = (cellState: GridCellType[]): WinState => {
 
     // return win state if someone won
     if (winner) {
-      winState.hasWon = true;
+      winState.gameOver = true;
       winState.winner = winner;
       winState.winningRow = possibleRow;
       // stop checking if someone wins

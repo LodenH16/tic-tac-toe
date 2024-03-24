@@ -3,7 +3,7 @@
 // css and stuff
 import "./globals.css"
 // React stuff
-import { createContext, useContext, useState, useEffect } from "react";
+import { useState } from "react";
 //components
 import Cell from "./Cell";
 // game helpers
@@ -19,6 +19,7 @@ import { checkEndGame, defaultWinState } from "./helpers/WinStateHelpers";
 export default function Home() {
   const [cellState, setCellState] = useState(defaultGridCells);
   const [gameState, setGameState] = useState(makeDefaultGameState("x", true));
+  const [winState, setWinState] = useState(defaultWinState);
 
   const handleCellClick = (cellId: string) => {
     let newCellState = [...cellState];
@@ -33,14 +34,21 @@ export default function Home() {
     const letterToDraw = turnOrder[gameState.currentTurn];
     clickedCell.letter = letterToDraw;
     // check game over
+    checkEndGame(cellState);
 
     setCellState(newCellState);
     setGameState(processUserTurn(gameState));
-    console.log(cellState);
   };
 
-  const cells = cellState.map((cell: GridCellType, index) => {
-    return Cell({ cell, handleCellClick });
+  const makeCells = cellState.map((cell: GridCellType, index) => {
+    const isWinningCell: boolean = winState.winningRow.includes(index);
+
+    return Cell({
+      cell,
+      handleCellClick,
+      isWinningCell,
+      gameOver: winState.gameOver,
+    });
   });
 
   return (
@@ -53,7 +61,7 @@ export default function Home() {
           "mx-auto" // margin to put it in the middle
         }
       >
-        {cells}
+        {makeCells}
       </div>
     </main>
   );
