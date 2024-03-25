@@ -86,7 +86,7 @@ export default function Home() {
           className={
             "block mx-auto my-4 " + // positioning
             "rounded-sm px-3 py-0.5 " + // size & shape
-            "bg-sky-300 hover:bg-sky-400 text-sky-950"
+            "bg-sky-300 hover:bg-sky-400 text-sky-950" // colors
           }
         >
           Reset
