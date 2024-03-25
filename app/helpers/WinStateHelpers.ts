@@ -34,10 +34,8 @@ const possibleWinningRows = [
 const xWins = JSON.stringify(["x", "x", "x"]);
 const oWins = JSON.stringify(["o", "o", "o"]);
 
-export const defaultWinState: WinState = {
-  gameOver: false,
-  winner: null,
-  winningRow: [],
+export const makeDefaultWinState = (): WinState => {
+  return { gameOver: false, winner: null, winningRow: [] };
 };
 
 // helper functions
@@ -60,7 +58,7 @@ const compareRows = (cellRow: string[]) => {
 
 // check each possible winning row for win state
 export const checkEndGame = (cellState: GridCellType[]): WinState => {
-  let winState = defaultWinState;
+  let winState = makeDefaultWinState();
 
   // for each possible winning row of indices...
   for (let possibleRow of possibleWinningRows) {
@@ -72,7 +70,6 @@ export const checkEndGame = (cellState: GridCellType[]): WinState => {
 
     // if row's cells aren't filled don't bother checking it
     if (cellRow.includes(null)) continue;
-
     // compare row of letters to xWins and oWins
     const winner = compareRows(cellRow as string[]);
 

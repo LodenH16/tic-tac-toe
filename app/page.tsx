@@ -3,29 +3,38 @@
 // css and stuff
 import "./globals.css"
 // React stuff
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //components
 import Cell from "./Cell";
 // game helpers
 import {
   xStartsFirst,
   oStartsFirst,
-  makeDefaultGameState,
+  makeNewGameState,
   processUserTurn,
 } from "./helpers/GameStateHelpers";
-import { GridCellType, defaultGridCells } from "./helpers/CellStateHelpers";
-import { checkEndGame, defaultWinState } from "./helpers/WinStateHelpers";
+import { GridCellType, makeDefaultGridCells } from "./helpers/CellStateHelpers";
+import { checkEndGame, makeDefaultWinState } from "./helpers/WinStateHelpers";
 
 export default function Home() {
-  const [cellState, setCellState] = useState(defaultGridCells);
-  const [gameState, setGameState] = useState(makeDefaultGameState("x", true));
-  const [winState, setWinState] = useState(defaultWinState);
+  const [cellState, setCellState] = useState(makeDefaultGridCells());
+  const [gameState, setGameState] = useState(makeNewGameState(true, true));
+  const [winState, setWinState] = useState(makeDefaultWinState);
+
+  const resetGameToDefault = () => {
+    const nextLetterStart = !gameState.xStartsGame;
+    const isUserStartGame = !gameState.userStartsFirst;
+
+    console.log("resetting");
+    setCellState(makeDefaultGridCells());
+    setGameState(makeNewGameState(nextLetterStart, isUserStartGame));
+    setWinState(makeDefaultWinState());
+  };
 
   const handleCellClick = (cellId: string) => {
     let newCellState = [...cellState];
     const clickedCell = newCellState[parseInt(cellId)];
-    const turnOrder =
-      gameState.startingTurn === "x" ? xStartsFirst : oStartsFirst;
+    const turnOrder = gameState.xStartsGame ? xStartsFirst : oStartsFirst;
 
     // set cell as selected
     clickedCell.selected = true;
@@ -34,11 +43,19 @@ export default function Home() {
     const letterToDraw = turnOrder[gameState.currentTurn];
     clickedCell.letter = letterToDraw;
     // check game over
-    checkEndGame(cellState);
+    const newWinState = checkEndGame(cellState);
 
     setCellState(newCellState);
     setGameState(processUserTurn(gameState));
+    setWinState(newWinState);
   };
+
+  const [showResetButton, setShowResetButton] = useState(false);
+  useEffect(() => {
+    if (winState.gameOver || gameState.currentTurn >= 9) {
+      setShowResetButton(true);
+    } else setShowResetButton(false);
+  }, [winState.gameOver, gameState.currentTurn]);
 
   const makeCells = cellState.map((cell: GridCellType, index) => {
     const isWinningCell: boolean = winState.winningRow.includes(index);
@@ -63,6 +80,18 @@ export default function Home() {
       >
         {makeCells}
       </div>
+      {showResetButton && (
+        <button
+          onClick={() => resetGameToDefault()}
+          className={
+            "block mx-auto my-4 " + // positioning
+            "rounded-sm px-3 py-0.5 " + // size & shape
+            "bg-sky-300 hover:bg-sky-400 text-sky-950"
+          }
+        >
+          Reset
+        </button>
+      )}
     </main>
   );
 }

@@ -7,21 +7,23 @@ export const oStartsFirst = [o, x, o, x, o, x, o, x, o];
 
 // Helpers for game state
 export interface GameStateType {
-  startingTurn: string;
+  xStartsGame: boolean;
+  userStartsFirst: boolean;
   currentTurn: number;
   gameOver: boolean;
   isUserTurn: boolean;
 }
 
-export const makeDefaultGameState = (
-  startingTurn: string = "x",
-  userStartFirst: boolean = true
-) => {
+export const makeNewGameState = (
+  xStartedGame: boolean = true,
+  userStartsFirst: boolean = true
+): GameStateType => {
   return {
-    startingTurn,
+    xStartsGame: xStartedGame,
+    userStartsFirst,
     currentTurn: 0,
     gameOver: false,
-    isUserTurn: userStartFirst,
+    isUserTurn: userStartsFirst,
   };
 };
 
