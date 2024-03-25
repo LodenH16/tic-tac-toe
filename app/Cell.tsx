@@ -55,7 +55,7 @@ export default function GridCell({
     <button
       id={id}
       key={`cell-${id}`}
-      disabled={selected}
+      disabled={selected || gameOver}
       className={
         "size-full rounded-md " + // size and shape of cells
         "flex items-center text-center " + // center the character texts
