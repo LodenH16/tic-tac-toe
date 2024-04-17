@@ -25,7 +25,7 @@ const winningDiagonalRows = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-const possibleWinningRows = [
+export const possibleWinningRows = [
   ...winningHorizontalRows,
   ...winningVerticalRows,
   ...winningDiagonalRows,
@@ -41,7 +41,7 @@ export const makeDefaultWinState = (): WinState => {
 // helper functions
 
 // get values of cells that could possibly be winning rows
-const getLettersFromCells = (
+export const getLettersFromCells = (
   cellState: GridCellType[],
   indexesToGrab: number[]
 ) => {
@@ -49,7 +49,7 @@ const getLettersFromCells = (
 };
 
 // compare row of cells for win state
-const compareRows = (cellRow: string[]) => {
+export const compareRows = (cellRow: string[]) => {
   const stringifiedCellRow = JSON.stringify(cellRow);
   if (stringifiedCellRow === xWins) return "x";
   if (stringifiedCellRow === oWins) return "o";
