@@ -61,15 +61,16 @@ export const checkEndGame = (cellState: GridCellType[]): WinState => {
   let winState = makeDefaultWinState();
 
   // for each possible winning row of indices...
-  for (let possibleRow of possibleWinningRows) {
+  for (let possibleWinningRow of possibleWinningRows) {
     // ...assimilate the letters it corresponds to
     const cellRow: Array<string | null> = getLettersFromCells(
       cellState,
-      possibleRow
+      possibleWinningRow
     );
 
     // if row's cells aren't filled don't bother checking it
     if (cellRow.includes(null)) continue;
+
     // compare row of letters to xWins and oWins
     const winner = compareRows(cellRow as string[]);
 
@@ -77,7 +78,7 @@ export const checkEndGame = (cellState: GridCellType[]): WinState => {
     if (winner) {
       winState.gameOver = true;
       winState.winner = winner;
-      winState.winningRow = possibleRow;
+      winState.winningRow = possibleWinningRow;
       // stop checking if someone wins
       break;
     }
