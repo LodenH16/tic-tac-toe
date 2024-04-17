@@ -2,28 +2,20 @@
 const x = "x";
 const o = "o";
 
-export const xStartsFirst = [x, o, x, o, x, o, x, o, x];
-export const oStartsFirst = [o, x, o, x, o, x, o, x, o];
+export const turnOrder = [x, o, x, o, x, o, x, o, x];
 
 // Helpers for game state
 export interface GameStateType {
-  xStartsGame: boolean;
-  userStartsFirst: boolean;
   currentTurn: number;
   gameOver: boolean;
   isUserTurn: boolean;
 }
 
-export const makeNewGameState = (
-  xStartedGame: boolean = true,
-  userStartsFirst: boolean = true
-): GameStateType => {
+export const makeNewGameState = (): GameStateType => {
   return {
-    xStartsGame: xStartedGame,
-    userStartsFirst,
     currentTurn: 0,
     gameOver: false,
-    isUserTurn: userStartsFirst,
+    isUserTurn: true,
   };
 };
 

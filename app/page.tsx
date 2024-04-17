@@ -8,8 +8,7 @@ import { useEffect, useState } from "react";
 import Cell from "./Cell";
 // game helpers
 import {
-  xStartsFirst,
-  oStartsFirst,
+  turnOrder,
   makeNewGameState,
   processUserTurn,
 } from "./helpers/GameStateHelpers";
@@ -18,23 +17,18 @@ import { checkEndGame, makeDefaultWinState } from "./helpers/WinStateHelpers";
 
 export default function Home() {
   const [cellState, setCellState] = useState(makeDefaultGridCells());
-  const [gameState, setGameState] = useState(makeNewGameState(true, true));
+  const [gameState, setGameState] = useState(makeNewGameState());
   const [winState, setWinState] = useState(makeDefaultWinState);
 
   const resetGameToDefault = () => {
-    const nextLetterStart = !gameState.xStartsGame;
-    const isUserStartGame = !gameState.userStartsFirst;
-
-    console.log("resetting");
     setCellState(makeDefaultGridCells());
-    setGameState(makeNewGameState(nextLetterStart, isUserStartGame));
+    setGameState(makeNewGameState());
     setWinState(makeDefaultWinState());
   };
 
   const handleCellClick = (cellId: string) => {
     let newCellState = [...cellState];
     const clickedCell = newCellState[parseInt(cellId)];
-    const turnOrder = gameState.xStartsGame ? xStartsFirst : oStartsFirst;
 
     // set cell as selected
     clickedCell.selected = true;
