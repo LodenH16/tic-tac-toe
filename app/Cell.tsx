@@ -43,9 +43,9 @@ export default function GridCell({
   const determineCharacter = () => {
     switch (letter) {
       case "x":
-        return <span>&#10005;</span>;
+        return <span className="w-full text-7xl font-mono">&#10005;</span>;
       case "o":
-        return <span>&#9711;</span>;
+        return <span className="w-full text-7xl font-mono">&#9711;</span>;
       case null:
         return null;
     }
@@ -53,7 +53,8 @@ export default function GridCell({
 
   return (
     <button
-      id={id}
+      id={`grid-cell-${id}`}
+      data-testId={`grid-cell-${id}`}
       key={`cell-${id}`}
       disabled={selected || gameOver}
       className={
@@ -63,7 +64,7 @@ export default function GridCell({
       }
       onClick={() => handleCellClick(id)}
     >
-      <span className="w-full text-7xl font-mono">{determineCharacter()}</span>
+      {determineCharacter()}
     </button>
   );
 }
