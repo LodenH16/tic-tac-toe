@@ -1,4 +1,4 @@
-import { expect, expectTypeOf, test, describe } from "vitest";
+import { expect, test, describe } from "vitest";
 import {
   makeDefaultWinState,
   getLettersFromCells,
@@ -16,7 +16,7 @@ turnOrder.forEach((letter, index) => {
   filledCellState[index].letter = letter;
 });
 
-describe("WinStateHelpers", () => {
+describe("WinStateHelpers helper functions", () => {
   describe("makeDefaultWinState", () => {
     test("returns a default winState object", () => {
       const defaultWinState = makeDefaultWinState();
