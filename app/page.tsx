@@ -18,7 +18,7 @@ import { checkEndGame, makeDefaultWinState } from "./helpers/WinStateHelpers";
 export default function Home() {
   const [cellState, setCellState] = useState(makeDefaultGridCells());
   const [gameState, setGameState] = useState(makeNewGameState());
-  const [winState, setWinState] = useState(makeDefaultWinState);
+  const [winState, setWinState] = useState(makeDefaultWinState());
 
   const resetGameToDefault = () => {
     setCellState(makeDefaultGridCells());
