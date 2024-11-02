@@ -1,7 +1,6 @@
 import { GridCellType } from "./CellStateHelpers";
 // HELPERS FOR CHECKING ENDGAME
 
-// interfaces
 export interface WinState {
   gameOver: boolean;
   winner: string | null;
@@ -34,11 +33,11 @@ export const possibleWinningRows = [
 const xWins = JSON.stringify(["x", "x", "x"]);
 const oWins = JSON.stringify(["o", "o", "o"]);
 
+// helper functions
+
 export const makeDefaultWinState = (): WinState => {
   return { gameOver: false, winner: null, winningRow: [] };
 };
-
-// helper functions
 
 // get values of cells that could possibly be winning rows
 export const getLettersFromCells = (
@@ -60,7 +59,7 @@ export const compareRows = (cellRow: string[]) => {
 export const checkEndGame = (cellState: GridCellType[]): WinState => {
   let winState = makeDefaultWinState();
 
-  // for each possible winning row of indices...
+  // for each possible winning row of indexes...
   for (let possibleWinningRow of possibleWinningRows) {
     // ...assimilate the letters it corresponds to
     const cellRow: Array<string | null> = getLettersFromCells(

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 // css and stuff
-import "./globals.css"
+import "./globals.css";
 // React stuff
 import { useEffect, useState } from "react";
 //components
@@ -64,12 +64,12 @@ export default function Home() {
 
   return (
     <main className="max-w-screen-lg mx-auto p-4">
-      <h1 className="w-full text-center my-4">Some text here</h1>
+      <h1 className="w-full text-center my-4">Tic-Tac-Toe</h1>
       <div
         className={
           "grid grid-cols-3 grid-rows-3 gap-2 " + // define grid stuff
           "w-80 h-80 " + // size of inside cells
-          "mx-auto" // margin to put it in the middle
+          "mx-auto" // margin to center it all
         }
       >
         {makeCells}

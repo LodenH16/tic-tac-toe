@@ -31,6 +31,7 @@ export default function GridCell({
         break;
       }
       case gameOver: {
+        // disables hover state
         setBackgroundColor("bg-slate-300");
         break;
       }

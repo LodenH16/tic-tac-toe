@@ -33,6 +33,9 @@ const xWinsClickOrder = [0, 1, 2, 4, 3, 5, 7, 8, 6];
 const xWinsWinningCells = [0, 3, 6];
 
 /* order of cells to click for o to win the game
+    x | o | x
+    x | o | 
+      | o | 
  */
 const oWinsClickOrder = [1, 0, 3, 4, 2, 8];
 const oWinsWinningCells = [0, 4, 8];
@@ -53,7 +56,7 @@ describe("Page", () => {
   test("Render the page", () => {
     const headingText = screen.getByRole("heading", {
       level: 1,
-      name: "Some text here",
+      name: "Tic-Tac-Toe",
     });
     const gridCells = screen.getAllByRole("button");
     const resetButton = screen.queryByRole("button", { name: "Reset" });

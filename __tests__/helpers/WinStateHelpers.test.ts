@@ -99,7 +99,7 @@ describe("WinStateHelpers helper functions", () => {
       x | o | x
       */
 
-      // indices of rows from possibleWinningRows
+      // indexes of rows from possibleWinningRows
       const expectedXOXRows = [0, 2, 3, 5].map((i) => possibleWinningRows[i]);
       const expectedOXORows = [1, 4].map((i) => possibleWinningRows[i]);
       const expectedXXXRows = [6, 7].map((i) => possibleWinningRows[i]);
